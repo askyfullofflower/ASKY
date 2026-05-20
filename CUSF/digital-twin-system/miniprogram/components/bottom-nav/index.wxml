@@ -1,0 +1,23 @@
+<view class="acs-nav-wrap">
+  <view class="acs-nav-card">
+    <view class="acs-nav-row">
+      <view
+        wx:for="{{tabs}}"
+        wx:key="key"
+        class="acs-nav-item {{current === item.key ? 'is-active' : ''}}"
+        data-key="{{item.key}}"
+        bindtap="onTapTab"
+      >
+        <view class="acs-nav-char-wrap {{current === item.key ? 'is-active' : ''}}">
+          <image
+            src="{{current === item.key ? item.iconActive : item.icon}}"
+            class="acs-nav-icon"
+            mode="aspectFit"
+          ></image>
+        </view>
+        <text class="acs-nav-label">{{item.label}}</text>
+      </view>
+    </view>
+    <view class="acs-nav-safe"></view>
+  </view>
+</view>

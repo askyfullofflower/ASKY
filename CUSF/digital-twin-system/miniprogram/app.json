@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/overview/index",
+    "pages/detail/index",
+    "pages/control/index",
+    "pages/ai-hub/index",
+    "pages/alerts/index"
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTitleText": "档案馆温湿度监控",
+    "navigationBarBackgroundColor": "#f8fafc",
+    "navigationBarTextStyle": "black",
+    "backgroundColorTop": "#f8fafc",
+    "backgroundColorBottom": "#f8fafc",
+    "backgroundColor": "#f8fafc",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,269 @@
+.ai-page {
+	padding-bottom: 188rpx;
+}
+
+.ai-content {
+	padding-top: calc(constant(safe-area-inset-top) + 20rpx);
+	padding-top: calc(env(safe-area-inset-top) + 20rpx);
+	padding-bottom: 200rpx;
+}
+
+.ai-hero-card {
+	margin-bottom: 0;
+}
+
+.page-sub {
+	display: block;
+	font-size: 44rpx;
+	font-weight: 700;
+	color: #131c2f;
+	margin-bottom: 24rpx;
+}
+
+.conn-bar-slim {
+	margin-top: 16rpx;
+	padding: 10rpx 14rpx;
+	border-radius: 12rpx;
+}
+
+.conn-bar {
+	background: var(--color-surface);
+	border: 1rpx solid var(--color-outline);
+	border-radius: var(--radius-md);
+	padding: 18rpx 20rpx;
+	box-shadow: none;
+}
+
+.conn-main {
+	display: flex;
+	align-items: center;
+	gap: 10rpx;
+}
+
+.conn-label {
+	font-size: 26rpx;
+	color: #1b2232;
+	font-weight: 600;
+}
+
+.conn-endpoint {
+	margin-top: 6rpx;
+	color: #727a8f;
+	font-size: 22rpx;
+}
+
+.quick-grid {
+	margin-top: 16rpx;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12rpx;
+}
+
+.quick-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 16rpx 12rpx;
+	border-radius: 12rpx;
+	border: 1rpx solid #d5dbec;
+	background: #f8faff;
+	font-size: 24rpx;
+	color: #1a2a4d;
+	text-align: center;
+	min-height: 80rpx;
+	box-shadow: 0 2rpx 4rpx rgba(0,0,0,0.02);
+}
+
+.msg-scroll {
+	margin-top: 12rpx;
+	height: 360rpx;
+	border: 1rpx solid #dbe1f0;
+	border-radius: 14rpx;
+	background: #fafcff;
+	padding: 12rpx;
+	box-sizing: border-box;
+}
+
+.msg-item {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 10rpx;
+}
+
+.msg-user {
+	align-items: flex-end;
+}
+
+.msg-assistant {
+	align-items: flex-start;
+}
+
+.msg-bubble {
+	max-width: 88%;
+	padding: 10rpx 14rpx;
+	border-radius: 12rpx;
+	font-size: 24rpx;
+	line-height: 1.45;
+	word-break: break-all;
+}
+
+.msg-user .msg-bubble {
+	background: #0f57d1;
+	color: #ffffff;
+}
+
+.msg-assistant .msg-bubble {
+	background: #eef2fb;
+	color: #253455;
+	border: 1rpx solid #d8dfef;
+}
+
+.msg-time {
+	margin-top: 4rpx;
+	font-size: 20rpx;
+	color: #6e7890;
+}
+
+.typing-tip {
+	font-size: 22rpx;
+	color: #6f7992;
+	padding: 8rpx 4rpx;
+}
+
+.input-row {
+	margin-top: 12rpx;
+	display: flex;
+	gap: 10rpx;
+	align-items: center;
+}
+
+.chat-input {
+	flex: 1;
+	height: 68rpx;
+	border-radius: 14rpx;
+	border: 1rpx solid #cfd7ea;
+	background: #ffffff;
+	padding: 0 16rpx;
+	font-size: 24rpx;
+}
+
+.send-btn {
+	margin: 0;
+	height: 68rpx;
+	line-height: 68rpx;
+	padding: 0 24rpx;
+	border-radius: 14rpx;
+	background: #0f57d1;
+	color: #ffffff;
+	font-size: 24rpx;
+}
+
+.send-btn::after {
+	border: none;
+}
+
+.pred-grid {
+	margin-top: 12rpx;
+	display: flex;
+	flex-direction: column;
+	gap: 8rpx;
+}
+
+.pred-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10rpx 0;
+	border-bottom: 1rpx dashed #dee4f2;
+}
+
+.pred-key {
+	font-size: 23rpx;
+	color: #5e6b86;
+}
+
+.pred-val {
+	font-size: 24rpx;
+	color: #1f3d72;
+	font-weight: 600;
+}
+
+/* ---- 档案材质风险AI推演 ---- */
+.mat-card {
+	border-left: 4rpx solid #0f57d1;
+}
+
+.mat-sub {
+	display: block;
+	margin-top: 6rpx;
+	font-size: 22rpx;
+	color: #6a748e;
+}
+
+.mat-label {
+	margin-top: 18rpx;
+	font-size: 22rpx;
+	color: #44526e;
+	margin-bottom: 8rpx;
+}
+
+.mat-picker {
+	width: 100%;
+	border: 1rpx solid #cfd7ea;
+	border-radius: 12rpx;
+	background: #f4f7ff;
+	padding: 0 16rpx;
+}
+
+.mat-picker-inner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 72rpx;
+}
+
+.mat-picker-text {
+	font-size: 24rpx;
+	color: #253455;
+}
+
+.mat-picker-arrow {
+	font-size: 26rpx;
+	color: #7080a0;
+}
+
+.mat-run-btn {
+	margin-top: 16rpx;
+	width: 100%;
+	height: 72rpx;
+	line-height: 72rpx;
+	border-radius: 12rpx;
+	background: linear-gradient(135deg, #0f57d1 0%, #1a6de8 100%);
+	color: #ffffff;
+	font-size: 26rpx;
+	font-weight: 600;
+	border: none;
+	padding: 0;
+}
+
+.mat-run-btn::after {
+	border: none;
+}
+
+.mat-run-btn-loading {
+	opacity: 0.7;
+}
+
+.mat-result {
+	margin-top: 16rpx;
+	padding: 16rpx;
+	border-radius: 12rpx;
+	background: #f0f5ff;
+	border: 1rpx solid #ccd9f5;
+}
+
+.mat-result-text {
+	font-size: 24rpx;
+	color: #253455;
+	line-height: 1.6;
+}

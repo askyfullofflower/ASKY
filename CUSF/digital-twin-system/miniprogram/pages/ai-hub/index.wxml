@@ -1,0 +1,115 @@
+<view class="acs-page ai-page">
+	<view class="acs-content ai-content">
+		<view class="acs-card animate-fade-in acs-card-pad ai-hero-card">
+			<text class="page-sub">AI 智能中枢</text>
+			<view class="conn-bar conn-{{wsClass}} conn-bar-slim">
+				<view class="conn-main">
+					<view class="acs-status-dot {{wsClass === 'connected' ? 'acs-status-dot-normal' : (wsClass === 'connecting' ? 'acs-status-dot-warning' : 'acs-status-dot-danger')}}"></view>
+					<text class="conn-label">{{wsStatusText}}</text>
+				</view>
+				<text class="conn-endpoint">{{wsEndpoint}}</text>
+			</view>
+		</view>
+
+		<view class="acs-card acs-card-pad">
+			<view class="acs-section-header">
+				<view class="section-indicator"></view>
+				<text class="acs-section-title">快捷指令</text>
+			</view>
+			<view class="quick-grid">
+				<view
+					wx:for="{{quickPrompts}}"
+					wx:key="*this"
+					class="quick-btn"
+					data-text="{{item}}"
+					bindtap="onTapQuickPrompt"
+				>{{item}}</view>
+			</view>
+		</view>
+
+		<view class="acs-card acs-card-pad">
+			<text class="acs-section-title">AI 对话</text>
+			<scroll-view class="msg-scroll" scroll-y="true" scroll-into-view="{{scrollToId}}">
+				<view wx:for="{{messages}}" wx:key="key" wx:for-item="msg" id="{{msg.key}}" class="msg-item {{msg.role === 'user' ? 'msg-user' : 'msg-assistant'}}">
+					<view class="msg-bubble">{{msg.content}}</view>
+					<text class="msg-time">{{msg.time}}</text>
+				</view>
+				<view wx:if="{{isTyping}}" class="typing-tip">AI 正在思考..</view>
+			</scroll-view>
+
+			<view class="input-row">
+				<input
+					class="chat-input"
+					placeholder="输入你的问题，例如：给出当前建议"
+					value="{{inputText}}"
+					bindinput="onInputText"
+					bindconfirm="onSend"
+					confirm-type="send"
+				/>
+				<button class="send-btn" bindtap="onSend" loading="{{isTyping}}" disabled="{{isTyping}}">发送</button>
+			</view>
+		</view>
+
+		<view class="acs-card acs-card-pad mat-card">
+			<text class="acs-section-title">档案材质风险AI推演</text>
+			<text class="mat-sub">基于当前库房微气候进行材质老化风险推演</text>
+
+			<view class="mat-label">目标分析载体 / 材质</view>
+			<picker
+				class="mat-picker"
+				mode="selector"
+				range="{{matOptions}}"
+				value="{{matIndex}}"
+				bindchange="onMatChange"
+			>
+				<view class="mat-picker-inner">
+					<text class="mat-picker-text">{{matOptions[matIndex]}}</text>
+					<text class="mat-picker-arrow">></text>
+				</view>
+			</picker>
+
+			<button
+				class="mat-run-btn {{isMatRunning ? 'mat-run-btn-loading' : ''}}"
+				bindtap="onRunMaterial"
+				loading="{{isMatRunning}}"
+				disabled="{{isMatRunning}}"
+			>基于当前微气候进行推演</button>
+
+			<view wx:if="{{matResultText}}" class="mat-result">
+				<text class="mat-result-text">{{matResultText}}</text>
+			</view>
+		</view>
+
+		<view class="acs-card acs-card-pad">
+			<text class="acs-section-title">📈 趋势预测</text>
+			<view class="pred-grid">
+				<view class="pred-row">
+					<text class="pred-key">温度趋势</text>
+					<text class="pred-val">{{prediction.tempTrend}}</text>
+				</view>
+				<view class="pred-row">
+					<text class="pred-key">1小时温度预测</text>
+					<text class="pred-val">{{prediction.nextTemp}}</text>
+				</view>
+				<view class="pred-row">
+					<text class="pred-key">湿度趋势</text>
+					<text class="pred-val">{{prediction.humTrend}}</text>
+				</view>
+				<view class="pred-row">
+					<text class="pred-key">1小时湿度预测</text>
+					<text class="pred-val">{{prediction.nextHum}}</text>
+				</view>
+				<view class="pred-row">
+					<text class="pred-key">预测置信度</text>
+					<text class="pred-val">{{prediction.confidence}}</text>
+				</view>
+				<view class="pred-row">
+					<text class="pred-key">合规判断</text>
+					<text class="pred-val">{{prediction.compliance}}</text>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<bottom-nav current="ai-hub" detailRoomId="{{activeRoomId}}"></bottom-nav>
+</view>

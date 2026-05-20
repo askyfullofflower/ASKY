@@ -1,0 +1,66 @@
+<view class="acs-page">
+	<view class="acs-content alerts-content">
+		<view class="acs-card animate-fade-in acs-card-pad">
+			<text class="page-title">告警记录</text>
+			<text class="page-sub">查看和管理系统历史告警</text>
+			<text class="count-tip">当前记录 {{totalCount}} 条</text>
+
+			<view class="filter-group">
+				<view
+					wx:for="{{levelFilters}}"
+					wx:key="key"
+					class="filter-chip {{selectedLevel === item.key ? 'is-active' : ''}}"
+					data-level="{{item.key}}"
+					bindtap="onSelectLevel"
+				>{{item.label}}</view>
+			</view>
+
+			<view class="filter-group filter-group-with-export">
+				<view
+					wx:for="{{statusFilters}}"
+					wx:key="key"
+					class="filter-chip {{selectedStatus === item.key ? 'is-active' : ''}}"
+					data-status="{{item.key}}"
+					bindtap="onSelectStatus"
+				>{{item.label}}</view>
+				<view class="export-btn" bindtap="onExport">📤 导出</view>
+			</view>
+		</view>
+
+		<view wx:if="{{!displayRecords.length}}" class="acs-card animate-fade-in acs-card-pad empty-card">
+			<text class="empty-text">当前筛选条件下暂无告警记录</text>
+		</view>
+
+		<view wx:for="{{displayRecords}}" wx:key="id" class="acs-card animate-fade-in alert-row {{item.resolved ? 'resolved' : ''}}">
+			<view class="alert-level-bar {{item.barClass}}"></view>
+			<view class="alert-main">
+				<view class="alert-head">
+					<view class="{{item.levelClass}}">{{item.level}}</view>
+					<text class="alert-location">{{item.location}}</text>
+					<text class="alert-time">{{item.alarmTime}}</text>
+				</view>
+
+				<text class="alert-reason">{{item.reason}}</text>
+				<text class="alert-source">来源：{{item.source}}</text>
+
+				<view wx:if="{{item.resolved}}" class="dispose-box">
+					<text class="dispose-text">处置结果：{{item.disposalResult}}</text>
+					<text wx:if="{{item.resolvedTime}}" class="dispose-time">解除时间：{{item.resolvedTime}}</text>
+				</view>
+
+				<view class="alert-foot">
+					<text class="alert-status {{item.statusClass}}">{{item.statusText}}</text>
+					<button
+						wx:if="{{!item.resolved}}"
+						class="handle-btn"
+						data-id="{{item.id}}"
+						bindtap="onProcessAlarm"
+					>处理</button>
+					<view wx:if="{{item.resolved}}" class="done-tag">已闭环</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<bottom-nav current="alerts" detailRoomId="{{activeRoomId}}"></bottom-nav>
+</view>

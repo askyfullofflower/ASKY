@@ -1,0 +1,102 @@
+<view class="acs-page detail-page">
+	<view class="acs-topbar">
+		<view class="acs-safe-top"></view>
+		<view class="acs-topbar-row detail-top-row">
+			<button class="back-btn" bindtap="onBack">← 返回</button>
+			<text class="detail-title">{{roomTitle}}</text>
+		</view>
+	</view>
+
+	<view class="acs-content detail-content">
+		<view class="tip-card">
+			<text class="tip-title">环境提示</text>
+			<text class="tip-text">{{envTip}}</text>
+		</view>
+
+		<view class="metric-grid">
+			<view class="acs-card animate-fade-in acs-card-pad metric-card">
+				<view class="metric-top">
+					<text class="metric-label">温度</text>
+					<view class="acs-chip {{roomStatusClass}}">{{roomStatusLabel}}</view>
+				</view>
+				<text class="metric-main metric-main-temp">{{temperature}}°C</text>
+				<text class="metric-sub">相对趋势 <text class="{{tempTrendClass}}">{{tempTrendText}}</text></text>
+			</view>
+			<view class="acs-card animate-fade-in acs-card-pad metric-card">
+				<view class="metric-top">
+					<text class="metric-label">湿度</text>
+					<view class="acs-chip {{roomStatusClass}}">{{roomStatusLabel}}</view>
+				</view>
+				<text class="metric-main metric-main-hum">{{humidity}}%</text>
+				<text class="metric-sub">相对趋势 <text class="{{humTrendClass}}">{{humTrendText}}</text></text>
+			</view>
+		</view>
+
+		<view class="acs-card animate-fade-in acs-card-pad trend-card">
+			<view class="trend-head">
+				<view class="trend-head-main">
+					<text class="acs-section-title">实时微气候波动曲线</text>
+					<text class="trend-sub">秒级更新温湿度变化轨迹</text>
+				</view>
+				<view class="trend-legend-wrap">
+					<view class="trend-legend-item">
+						<view class="legend-line line-temp"></view>
+						<text class="legend-text">温度</text>
+					</view>
+					<view class="trend-legend-item">
+						<view class="legend-line line-humidity"></view>
+						<text class="legend-text">湿度</text>
+					</view>
+				</view>
+			</view>
+			<canvas canvas-id="trendCanvas" class="trend-canvas" width="{{trendCanvasWidth}}" height="{{trendCanvasHeight}}"></canvas>
+			<view class="trend-time-row">
+				<text class="trend-time">{{trendStartTime}}</text>
+				<text class="trend-time">{{trendEndTime}}</text>
+			</view>
+		</view>
+
+		<view class="acs-card animate-fade-in acs-card-pad">
+			<text class="acs-section-title">⚙️ 设备运行状态</text>
+			<view class="device-list device-grid-layout">
+				<view wx:for="{{equipmentCards}}" wx:key="key" wx:for-item="device" class="device-card">
+					<view class="device-head">
+						<view>
+							<text class="device-name">{{device.name}}</text>
+							<text class="device-mode">{{device.modeText}}</text>
+						</view>
+						<switch
+							checked="{{device.active}}"
+							color="#0052cc"
+							data-key="{{device.key}}"
+							bindchange="onToggleDevice"
+						/>
+					</view>
+
+					<view class="device-power-row">
+						<text class="device-state">{{device.activeText}}</text>
+						<text class="device-power">{{device.powerText}}</text>
+					</view>
+
+					<view class="power-bar">
+						<view class="power-fill" style="width: {{device.power}}%;"></view>
+					</view>
+
+					<view class="level-row">
+						<view
+							wx:for="{{device.levelOptions}}"
+							wx:key="key"
+							wx:for-item="option"
+							class="level-btn {{option.on ? 'is-active' : ''}}"
+							data-key="{{device.key}}"
+							data-level="{{option.key}}"
+							bindtap="onSetDeviceLevel"
+						>{{option.label}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<bottom-nav current="detail" detailRoomId="{{activeRoomId}}"></bottom-nav>
+</view>

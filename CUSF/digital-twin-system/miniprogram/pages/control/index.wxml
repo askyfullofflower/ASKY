@@ -1,0 +1,80 @@
+<view class="acs-page control-page">
+	<view class="acs-content control-content control-content-no-topbar">
+		<view class="acs-card animate-fade-in acs-card-pad">
+			<text class="page-title">智能调控</text>
+			<text class="page-sub">全局设备管理与环境模式控制</text>
+
+			<view class="mode-switch-wrap">
+				<button
+					class="mode-btn hover-effect {{mode === 'auto' ? 'is-active' : ''}}"
+					data-mode="auto"
+					bindtap="onSwitchMode"
+				>自动模式</button>
+				<button
+					class="mode-btn hover-effect {{mode === 'manual' ? 'is-active' : ''}}"
+					data-mode="manual"
+					bindtap="onSwitchMode"
+				>手动模式</button>
+			</view>
+			<text class="mode-hint">{{modeHint}}</text>
+		</view>
+
+		<view class="acs-card animate-fade-in acs-card-pad">
+			<text style="font-size:24rpx; font-weight:600; color:#3a4b66; margin-bottom:12rpx; display:block;">快速场景设定</text>
+			<view class="scene-grid control-2x2-grid">
+				<view
+					wx:for="{{sceneButtons}}"
+					wx:key="key"
+					class="scene-btn hover-effect"
+					data-scene="{{item.key}}"
+					bindtap="onSceneTap"
+				>
+					<view class="scene-icon-circle" style="background-color: {{item.circleBg}};">
+						<image src="{{item.icon}}" class="scene-icon" mode="aspectFit"></image>
+					</view>
+					<text class="scene-title">{{item.title}}</text>
+				</view>
+			</view>
+		</view>
+
+		<view class="acs-card animate-fade-in acs-card-pad">
+			<text class="acs-section-title">异常注入模拟器（鲁棒性测试）</text>
+			<text class="mode-hint">用于验证系统在极端工况下的告警与联动鲁棒性</text>
+
+			<view class="anomaly-grid">
+				<view
+					wx:for="{{anomalyButtons}}"
+					wx:key="action"
+					class="anomaly-btn hover-effect {{item.tone}}"
+					data-action="{{item.action}}"
+					bindtap="onInjectAnomaly"
+				>
+					<view class="anomaly-title-row">
+						<text class="anomaly-symbol" style="color: {{item.textColor}};">{{item.symbol}}</text>
+						<text class="anomaly-title" style="color: {{item.textColor}};">{{item.title}}</text>
+					</view>
+					<text class="anomaly-sub">{{item.subtitle}}</text>
+				</view>
+			</view>
+
+			<button class="clear-anomaly-btn hover-effect" bindtap="onStopAnomaly">■ 清除所有异常</button>
+		</view>
+
+		<view class="acs-card animate-fade-in acs-card-pad">
+			<view class="log-head">
+				<text class="acs-section-title">📝 系统日志</text>
+				<text class="log-count">最近 {{systemLogs.length}} 条</text>
+			</view>
+
+			<scroll-view scroll-y class="log-scroll">
+				<view wx:if="{{!systemLogs.length}}" class="log-empty">暂无日志事件</view>
+				<view wx:for="{{systemLogs}}" wx:key="key" class="log-item {{item.toneClass}}">
+					<text class="log-time">[{{item.time}}]</text>
+					<text class="log-text">{{item.text}}</text>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+
+	<bottom-nav current="control" detailRoomId="{{activeRoomId}}"></bottom-nav>
+</view>

@@ -1,0 +1,115 @@
+<view class="acs-page">
+	<view class="acs-content overview-content">
+		<view class="acs-card animate-fade-in acs-card-pad ov-hero-card">			
+			<text class="page-sub">档案馆环境监测</text>
+			<view class="conn-bar conn-{{wsClass}} conn-bar-slim">
+				<view class="conn-main">
+					<view class="acs-status-dot {{wsClass === 'connected' ? 'acs-status-dot-normal' : (wsClass === 'connecting' ? 'acs-status-dot-warning' : 'acs-status-dot-danger')}}"></view>
+					<text class="conn-label">{{wsStatusText}}</text>
+				</view>
+				<text class="conn-endpoint">{{wsEndpoint}}</text>
+			</view>
+		</view>
+
+		<view wx:if="{{latestAlert && !hideAlertBanner}}" class="alert-banner">
+			<view class="alert-banner-main">
+				<text class="alert-title">最新告警 · {{latestAlert.level}}</text>
+				<text class="alert-text">{{latestAlert.location}}：{{latestAlert.reason}}</text>
+			</view>
+			<button class="alert-close" bindtap="onCloseAlertBanner">关闭</button>
+		</view>
+
+		<view class="dashboard-top-grid">
+			<view class="status-row">
+				<view wx:for="{{summaryChips}}" wx:key="key" class="{{item.className}}">
+					{{item.label}}
+				</view>
+			</view>
+			
+			<view class="metric-grid">
+			<view class="acs-card animate-fade-in acs-card-pad metric-card">
+				<view class="metric-head">
+					<text class="metric-title">全馆平均温度</text>
+					<view class="acs-chip {{statusToneClass}}">{{statusText}}</view>
+				</view>
+				<view class="metric-value-row">
+					<text class="metric-value metric-value-temp">{{temperature}}</text>
+					<text class="metric-unit">°C</text>
+				</view>
+				<text class="metric-delta">较最近趋势 <text class="{{tempDeltaClass}}">{{tempDeltaText}}</text></text>
+			</view>
+
+			<view class="acs-card animate-fade-in acs-card-pad metric-card">
+				<view class="metric-head">
+					<text class="metric-title">全馆平均湿度</text>
+					<view class="acs-chip {{statusToneClass}}">{{statusText}}</view>
+				</view>
+				<view class="metric-value-row">
+					<text class="metric-value metric-value-hum">{{humidity}}</text>
+					<text class="metric-unit">%</text>
+				</view>
+				<text class="metric-delta">较最近趋势 <text class="{{humDeltaClass}}">{{humDeltaText}}</text></text>
+			</view>
+		</view>
+		</view>
+
+		<view class="acs-card animate-fade-in acs-card-pad">
+			<view class="env-sensor-grid">
+				<view class="env-sensor-item">
+					<text class="env-sensor-label">💨 PM2.5</text>
+					<view class="env-sensor-val-row">
+						<text class="env-sensor-val">{{pm25}}</text>
+						<text class="env-sensor-unit">μg/m³</text>
+					</view>
+				</view>
+				<view class="env-sensor-item">
+					<text class="env-sensor-label">⚪️ 氮氧化物</text>
+					<view class="env-sensor-val-row">
+						<text class="env-sensor-val">{{nox}}</text>
+						<text class="env-sensor-unit">ppb</text>
+					</view>
+				</view>
+				<view class="env-sensor-item env-sensor-item-wide {{waterLeakDetected ? 'env-leak-alert' : 'env-leak-normal'}}">
+					<text class="env-sensor-label">漏水检测</text>
+					<view class="env-sensor-val-row">
+						<text class="env-sensor-val env-leak-status">{{waterLeakDetected ? '已检测到漏水' : '正常'}}</text>
+					</view>
+					<text wx:if="{{waterLeakDetected}}" class="env-leak-location">位置：{{waterLeakLocation}}</text>
+				</view>
+			</view>
+		</view>
+
+		<view class="acs-card animate-fade-in acs-card-pad">
+			<view class="section-head">
+				<text class="acs-section-title">区域状态</text>
+			</view>
+
+			<view class="room-list">
+				<view
+					wx:for="{{roomCards}}"
+					wx:key="id"
+					class="room-card {{item.toneClass}}"
+					data-id="{{item.id}}"
+					bindtap="onOpenRoomDetail"
+				>
+					<view class="room-title-row">
+						<text class="room-name">{{item.name}}</text>
+						<view class="acs-chip {{item.chipClass}}">{{item.statusLabel}}</view>
+					</view>
+					<view class="room-metrics">
+						<view class="room-metric-box">
+							<text class="room-metric-label">温度</text>
+							<text class="room-metric-val">{{item.temperature}}°C <text wx:if="{{item.tempTrendText}}" class="{{item.tempTrendClass}}">{{item.tempTrendText}}</text></text>
+						</view>
+						<view class="room-metric-box">
+							<text class="room-metric-label">湿度</text>
+							<text class="room-metric-val">{{item.humidity}}% <text wx:if="{{item.humTrendText}}" class="{{item.humTrendClass}}">{{item.humTrendText}}</text></text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<bottom-nav current="overview" detailRoomId="{{activeRoomId}}"></bottom-nav>
+</view>

@@ -1,0 +1,11 @@
+{
+	"navigationBarTitleText": "档案馆调控端",
+	"navigationStyle": "custom",
+	"navigationBarBackgroundColor": "#1e1b4b",
+	"navigationBarTextStyle": "white",
+	"backgroundColorTop": "#1e1b4b",
+	"backgroundColorBottom": "#09090b",
+	"backgroundColor": "#09090b",
+	"backgroundTextStyle": "light",
+	"enablePullDownRefresh": true
+}

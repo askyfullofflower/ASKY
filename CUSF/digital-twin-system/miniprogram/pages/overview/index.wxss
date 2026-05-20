@@ -1,0 +1,322 @@
+.overview-content {
+	padding-top: calc(constant(safe-area-inset-top) + 20rpx);
+	padding-top: calc(env(safe-area-inset-top) + 20rpx);
+	padding-bottom: 200rpx;
+}
+
+.ov-hero-card {
+	margin-bottom: 0;
+}
+
+.conn-bar-slim {
+	margin-top: 16rpx;
+	padding: 10rpx 14rpx;
+	border-radius: 12rpx;
+}
+
+.conn-bar {
+	background: var(--color-surface);
+	border: 1rpx solid var(--color-outline);
+	border-radius: var(--radius-md);
+	padding: 18rpx 20rpx;
+	box-shadow: none;
+}
+
+.conn-main {
+	display: flex;
+	align-items: center;
+	gap: 10rpx;
+}
+
+.conn-label {
+	font-size: 26rpx;
+	color: #1b2232;
+	font-weight: 600;
+}
+
+.conn-endpoint {
+	margin-top: 6rpx;
+	color: #727a8f;
+	font-size: 22rpx;
+}
+.page-title {
+	display: block;
+	font-size: 44rpx;
+	line-height: 1.15;
+	color: #131c2f;
+	font-weight: 700;
+}
+.page-sub {
+	display: block;
+	font-size: 44rpx;
+	font-weight: 700;
+	color: #131c2f;
+	margin-bottom: 24rpx;
+}
+.alert-banner {
+	display: flex;
+	gap: 12rpx;
+	justify-content: space-between;
+	align-items: center;
+	background: #ffe0dc;
+	border: 1rpx solid #f3b9b1;
+	border-radius: 18rpx;
+	padding: 18rpx 20rpx;
+}
+
+.alert-banner-main {
+	flex: 1;
+	min-width: 0;
+}
+
+.alert-title {
+	display: block;
+	font-size: 24rpx;
+	font-weight: 700;
+	color: #c33636;
+}
+
+.alert-text {
+	display: block;
+	margin-top: 8rpx;
+	font-size: 24rpx;
+	color: #8b3431;
+}
+
+.alert-close {
+	margin: 0;
+	height: 56rpx;
+	line-height: 56rpx;
+	border-radius: 12rpx;
+	padding: 0 18rpx;
+	background: #ffffff;
+	border: 1rpx solid #cd7d73;
+	color: #9f2f2c;
+	font-size: 22rpx;
+}
+
+.alert-close::after {
+	border: none;
+}
+
+.status-row {
+	display: flex;
+	gap: 10rpx;
+	overflow-x: auto;
+	white-space: nowrap;
+	padding-bottom: 6rpx;
+}
+
+.metric-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 14rpx;
+}
+
+.metric-card {
+	min-height: 220rpx;
+}
+
+.metric-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 8rpx;
+}
+
+.metric-title {
+	font-size: 24rpx;
+	color: #60677b;
+}
+
+.metric-value-row {
+	margin-top: 16rpx;
+	display: flex;
+	align-items: baseline;
+	gap: 8rpx;
+}
+
+.metric-value {
+	font-size: 62rpx;
+	line-height: 1;
+	font-weight: 700;
+	color: #111a2d;
+}
+
+.metric-value-temp {
+	color: #c95454;
+}
+
+.metric-value-hum {
+	color: #3b86dc;
+}
+
+.metric-unit {
+	font-size: 30rpx;
+	color: #5e667a;
+}
+
+.metric-delta {
+	display: block;
+	margin-top: 14rpx;
+	color: #677088;
+	font-size: 22rpx;
+}
+
+.section-head {
+	margin-bottom: 14rpx;
+}
+
+.room-list {
+	display: flex;
+	flex-direction: column;
+	gap: 14rpx;
+}
+
+.room-card {
+	border: 1rpx solid var(--color-outline);
+	border-radius: var(--radius-lg);
+	padding: 16rpx;
+	background: var(--color-surface);
+	box-shadow: none;
+}
+
+.room-card.tone-warning {
+	border-color: #f1d0a5;
+	background: #fff9ee;
+}
+
+.room-card.tone-danger {
+	border-color: #f1beb8;
+	background: #fff6f4;
+}
+
+.overview-content .acs-chip.acs-chip-normal {
+	color: #0b8f5d;
+	border-color: #9fd9c0;
+	background: #eefaf4;
+}
+
+.room-title-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12rpx;
+}
+
+.room-name {
+	font-size: 32rpx;
+	font-weight: 700;
+	color: #1a2234;
+}
+
+.room-metrics {
+	margin-top: 12rpx;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10rpx;
+}
+
+.room-metric-box {
+	border-radius: 12rpx;
+	background: #eef1fa;
+	padding: 12rpx;
+}
+
+.room-metric-label {
+	font-size: 22rpx;
+	color: #444d65;
+}
+
+.room-metric-val {
+	margin-top: 6rpx;
+	display: block;
+	font-size: 34rpx;
+	font-weight: 600;
+	color: #0e0f12;
+}
+
+.metric-value-temp {
+	color: #c95454;
+}
+
+.metric-value-hum {
+	color: #3b86dc;
+}
+
+.trend-up {
+	color: #0b8f5d;
+	font-size: 24rpx;
+	margin-left: 8rpx;
+}
+
+.trend-down {
+	color: #c95454;
+	font-size: 24rpx;
+	margin-left: 8rpx;
+}
+
+/* PM2.5 / NOx / Water Leak monitoring */
+.env-sensor-grid {
+	margin-top: 14rpx;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12rpx;
+}
+
+.env-sensor-item {
+	border-radius: 16rpx;
+	background: #f4f7ff;
+	border: 1rpx solid #dde3f5;
+	padding: 18rpx 16rpx;
+}
+
+.env-sensor-item-wide {
+	grid-column: span 2;
+}
+
+.env-sensor-label {
+	display: block;
+	font-size: 22rpx;
+	color: #636e8a;
+	margin-bottom: 8rpx;
+}
+
+.env-sensor-val-row {
+	display: flex;
+	align-items: baseline;
+	gap: 6rpx;
+}
+
+.env-sensor-val {
+	font-size: 38rpx;
+	font-weight: 700;
+	color: #077a52;
+}
+
+.env-sensor-unit {
+	font-size: 22rpx;
+	color: #6a748c;
+}
+
+.env-leak-normal {
+	background: #f0faf5;
+	border-color: #b8e6cf;
+}
+
+.env-leak-alert {
+	background: #fff4f3;
+	border-color: #f5b8b2;
+}
+
+.env-leak-status {
+	font-size: 28rpx;
+	font-weight: 600;
+}
+
+.env-leak-location {
+	display: block;
+	margin-top: 4rpx;
+	font-size: 22rpx;
+	color: #c0392b;
+}

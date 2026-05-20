@@ -1,0 +1,180 @@
+﻿<!--
+  档案馆温湿度实时监测与智能调控系统 - 微信小程序控制端
+  页面: pages/index/index.wxml
+  风格: Spotify 深色沉浸式
+-->
+
+<view class="sp-page">
+  <view class="sp-nav">
+    <view class="sp-nav-safe"></view>
+    <view class="sp-nav-bar">
+      <text class="sp-nav-title">档案馆调控端</text>
+    </view>
+  </view>
+
+  <view class="sp-header">
+    <view class="sp-brand-row">
+      <view class="sp-brand-dot"></view>
+      <text class="sp-brand">档案馆温湿度监控</text>
+    </view>
+    <text class="sp-subtitle">档案馆温湿度实时监测与智能调控</text>
+  </view>
+
+  <view class="sp-conn-card {{wsClass}}">
+    <view class="sp-conn-main">
+      <text class="sp-conn-dot">●</text>
+      <text class="sp-conn-state">{{wsStatusText}}</text>
+    </view>
+    <text class="sp-conn-endpoint">{{wsEndpoint}}</text>
+  </view>
+
+  <view class="sp-metric-grid">
+    <view class="sp-card sp-metric-card">
+      <text class="sp-metric-label">温度</text>
+      <text class="sp-metric-value sp-temp {{tempPulseClass}}">{{temperature}}°C</text>
+    </view>
+    <view class="sp-card sp-metric-card">
+      <text class="sp-metric-label">湿度</text>
+      <text class="sp-metric-value sp-humi {{humiPulseClass}}">{{humidity}}%RH</text>
+    </view>
+    <view class="sp-card sp-metric-card">
+      <text class="sp-metric-label">PM2.5</text>
+      <text class="sp-metric-value sp-air {{pm25PulseClass}}">{{pm25}} ug/m3</text>
+    </view>
+    <view class="sp-card sp-metric-card">
+      <text class="sp-metric-label">氮氧化物</text>
+      <text class="sp-metric-value sp-air {{noxPulseClass}}">{{nox}} mg/m3</text>
+    </view>
+  </view>
+
+  <view class="sp-status-card {{statusClass}}">
+    <text class="sp-status-text">{{statusText}}</text>
+  </view>
+
+  <view class="sp-card sp-leak-card {{leakClass}}">
+    <text class="sp-panel-title">漏水检测</text>
+    <text class="sp-leak-text">{{leakText}}</text>
+  </view>
+
+  <view class="sp-card sp-meta-card">
+    <view class="sp-meta-row">
+      <text class="sp-meta-key">最后更新</text>
+      <text class="sp-meta-val">{{lastTimestamp}}</text>
+    </view>
+    <view class="sp-meta-row">
+      <text class="sp-meta-key">异常模式</text>
+      <text class="{{anomalyRunningClass}}">{{anomalyRunningText}}</text>
+    </view>
+    <view class="sp-meta-row">
+      <text class="sp-meta-key">异常库房</text>
+      <text class="{{abnormalCountClass}}">{{abnormalCount}}</text>
+    </view>
+    <text class="sp-meta-summary">{{abnormalSummary}}</text>
+  </view>
+
+  <view class="sp-control-wrap">
+    <button
+      class="{{coolBtnClass}}"
+      disabled="{{coolDownDisabled}}"
+      bindtap="onCoolDown"
+    >
+      开启降温
+    </button>
+    <text class="sp-hint">{{modeHintText}}</text>
+
+    <view class="sp-card sp-mode-card">
+      <view class="sp-mode-head">
+        <text class="sp-panel-title">调控模式</text>
+        <text class="{{controlModeBadgeClass}}">{{controlModeText}}</text>
+      </view>
+
+      <view class="sp-mode-switch">
+        <button
+          class="{{manualBtnClass}}"
+          data-mode="manual"
+          disabled="{{modeSwitchDisabled}}"
+          bindtap="onSwitchControlMode"
+        >手动</button>
+        <button
+          class="{{autoBtnClass}}"
+          data-mode="auto"
+          disabled="{{modeSwitchDisabled}}"
+          bindtap="onSwitchControlMode"
+        >自动</button>
+      </view>
+
+      <text class="sp-hint" wx:if="{{modeLoading}}">正在切换模式，请稍候...</text>
+
+      <view class="sp-eq-grid">
+        <view wx:for="{{equipmentItems}}" wx:key="key" class="sp-eq-item {{item.modeClass}}">
+          <view class="sp-eq-row">
+            <text class="sp-eq-name">{{item.name}}</text>
+            <text class="sp-eq-mode">{{item.modeText}}</text>
+          </view>
+          <view class="sp-eq-row">
+            <text class="sp-eq-state">{{item.activeText}}</text>
+            <text class="sp-eq-power">{{item.powerText}}</text>
+          </view>
+          <view class="sp-eq-bar">
+            <view class="sp-eq-fill" style="{{item.powerStyle}}"></view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <text class="sp-hint" wx:if="{{coolDownDisabled}}">当前状态不可执行降温指令</text>
+    <text class="sp-hint" wx:if="{{actionDisabled}}">服务器未连接，请检查后端状态</text>
+    <view wx:if="{{noticeText}}" class="{{noticeClass}}">{{noticeText}}</view>
+  </view>
+
+  <view class="sp-card sp-anomaly-card">
+    <text class="sp-panel-title">异常注入模拟器</text>
+    <view class="sp-chip-grid">
+      <button class="sp-chip cold" bindtap="onInjectCold" disabled="{{actionDisabled}}">寒潮模拟</button>
+      <button class="sp-chip rain" bindtap="onInjectRain" disabled="{{actionDisabled}}">梅雨模拟</button>
+      <button class="sp-chip dry" bindtap="onInjectDry" disabled="{{actionDisabled}}">干燥模拟</button>
+      <button class="sp-chip fire" bindtap="onInjectFire" disabled="{{actionDisabled}}">火灾模拟</button>
+      <button class="sp-chip gas" bindtap="onInjectGas" disabled="{{actionDisabled}}">气体模拟</button>
+      <button class="sp-chip leak" bindtap="onInjectLeak" disabled="{{actionDisabled}}">漏水模拟</button>
+      <button class="sp-chip outlier" bindtap="onInjectOutlier" disabled="{{actionDisabled}}">越界模拟</button>
+      <button class="sp-chip stop" bindtap="onStopAnomaly" disabled="{{actionDisabled}}">清除异常</button>
+    </view>
+  </view>
+
+  <view class="sp-card sp-alarm-card">
+    <view class="sp-panel-head">
+      <text class="sp-panel-title">报警记录 ({{alarmTotal}})</text>
+      <view class="sp-action-group">
+        <button class="sp-mini-btn" bindtap="onRefreshAlarmRecords">刷新</button>
+        <button class="sp-mini-btn sp-mini-btn-primary" bindtap="onExportAlarmRecords">导出</button>
+      </view>
+    </view>
+
+    <text class="sp-hint" wx:if="{{alarmLoading}}">报警记录加载中...</text>
+    <scroll-view class="sp-alarm-scroll" scroll-y="true">
+      <view wx:if="{{alarmEmpty}}" class="sp-empty">暂无报警记录</view>
+      <view wx:for="{{alarmRecords}}" wx:key="key" class="sp-alarm-item {{item.statusClass}}">
+        <view class="sp-alarm-line">
+          <text class="sp-alarm-time">{{item.alarmTime}}</text>
+          <text class="sp-alarm-tag">{{item.level}} · {{item.statusText}}</text>
+        </view>
+        <view class="sp-alarm-line">
+          <text>地点 {{item.location}}</text>
+          <text>来源 {{item.source}}</text>
+        </view>
+        <text class="sp-alarm-reason">原因 {{item.reason}}</text>
+        <text class="sp-alarm-disposal">处置 {{item.disposalResult}}</text>
+        <text wx:if="{{item.resolvedTime}}" class="sp-alarm-resolved">解除 {{item.resolvedTime}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="sp-card sp-log-card">
+    <text class="sp-panel-title">系统日志</text>
+    <scroll-view scroll-y class="sp-log-scroll">
+      <view wx:for="{{logs}}" wx:key="index" class="sp-log-item {{item.type}}">
+        <text>{{item.text}}</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>
