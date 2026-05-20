@@ -169,7 +169,7 @@ $env:FEISHU_WEBHOOK_URL="你的飞书 webhook 地址"
 ## 状态说明（当前实现）
 | 状态 | 条件 |
 |---|---|
-| `normal` | 温度 14~24°C 且湿度 45~60%RH |
+| `normal` | 温度 14-24°C 且湿度 45-60%RH |
 | `temp_alert` | 温度 > 24°C |
 | `temp_low_alert` | 温度 < 14°C |
 | `humidity_alert` | 湿度 > 60%RH |
